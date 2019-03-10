@@ -18,6 +18,13 @@ const job = new CronJob('47 11 * * *', () => {
 
 job.start()
 
+io.on('connection', (socket) => {
+
+  socket.on('getEmployees', () => {
+		console.log('WOWOWOWOWOW ')
+  })
+})
+
 app.get("*", (req, res) => {
     res.sendFile(path.join(__dirname, "client", "build", "index.html"))
 });

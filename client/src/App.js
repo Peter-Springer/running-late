@@ -1,8 +1,13 @@
 import React, { Component } from 'react';
+import socket from './api/index'
 import logo from './logo.svg';
 import './App.css';
 
 class App extends Component {
+  componentDidMount() {
+    socket.emit('getEmployees')
+  }
+
   render() {
     return (
       <div className="App">
