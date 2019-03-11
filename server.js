@@ -5,6 +5,7 @@ const port = process.env.PORT || 5000
 const io = require('socket.io')(server, { origins: '*:*'})
 const mongoose = require('mongoose')
 const path = require("path")
+const Models = require('./models/employee')
 const CronJob = require('cron').CronJob;
 app.use(express.static(path.join(__dirname, "client", "build")))
 
@@ -20,7 +21,11 @@ job.start()
 
 io.on('connection', (socket) => {
 
-  socket.on('getEmployees', () => {
+  socket.on('requestEmployees', () => {
+		let x = Models.Employee.find({}, (err, employee) => {
+      if (err) console.log(err)
+			io.sockets.emit('employees', employee)
+		})
 		console.log('WOWOWOWOWOW ')
   })
 })

@@ -5,7 +5,10 @@ import './App.css';
 
 class App extends Component {
   componentDidMount() {
-    socket.emit('getEmployees')
+    socket.emit('requestEmployees')
+    socket.on('employees', employee => {
+      console.log(employee)
+    })
   }
 
   render() {
